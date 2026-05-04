@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Gestión de Salidas - Feria de Ciencias</title>
+
+<style>
+  :root {
+    --primary-color: #1a73e8;
+    --secondary-color: #28a745;
+    --warning-color: #ffc107;
+    --bg-color: #f8f9fa;
+    --text-color: #3c4043;
+  }
+
+  body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 20px;
+    color: var(--text-color);
+    line-height: 1.6;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+    background: white;
+    padding: 20px;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+
+  h1 {
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .subtitle {
+    color: #5f6368;
+    font-size: 18px;
+    margin-top: 5px;
+  }
+
+  .instrucciones {
+    background: #fff;
+    padding: 25px;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    border-left: 6px solid var(--warning-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+  }
+
+  .instrucciones h2 {
+    margin-top: 0;
+    color: #856404;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .instrucciones ul li {
+    margin-bottom: 12px;
+  }
+
+  code {
+    background: #f1f3f4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Consolas', monospace;
+    color: #d93025;
+  }
+
+  #contenedor {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .grupo {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .grupo h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    border-bottom: 2px solid #f1f3f4;
+    padding-bottom: 10px;
+    font-size: 18px;
+  }
+
+  .archivos {
+    margin: 15px 0;
+    flex-grow: 1;
+  }
+
+  .archivos a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .archivos a:hover {
+    text-decoration: underline;
+  }
+
+  .archivos a::before {
+    content: "📄";
+  }
+
+  button {
+    padding: 12px;
+    width: 100%;
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  button:hover {
+    background: #1e7e34;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  button:active {
+    transform: translateY(0);
+  }
+
+  .aviso-navegador {
+    display: block;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+    color: #666;
+    font-style: italic;
+    font-size: 0.85em;
+  }
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Sistema Gestión de Salidas</h1>
+  <div class="subtitle">Proyecto Feria de Ciencias - 4to año Informática</div>
+</header>
+
+<div class="instrucciones">
+  <h2>📋 Tarea a realizar (por cada archivo):</h2>
+  <ul>
+    <li>Descarga los archivos asignados por tu profesor a tu grupo</li>
+    <li>Abre cada archivo con <strong>Excel</strong>.</li>
+    <li>Elimina <strong>TODAS</strong> las columnas salvo: <code>nro</code>, <code>dni</code>, <code>apellido</code>, <code>nombre</code>.</li>
+    <li>En <strong>D1</strong> agrega el título: <strong>Nombre</strong>.</li>
+    <li>En la celda <strong>D2</strong> ingresa la fórmula: <code>=B2&" "&C2</code></li>
+    <li>Aplica el <strong>Controlador de relleno</strong> hacia abajo para completar la columna.</li>
+    <li>Agrega las columnas: <strong>curso</strong>, <strong>division</strong>, <strong>turno</strong>, <strong>especialidad</strong>.</li>
+    <li>Completa las columnas ej 1ero a mañana basico</li>
+    <li>Guarda todas las modificaciones.</li>
+  </ul>
+  <span class="aviso-navegador">💡 <strong>Nota:</strong> Si el botón de descarga solo baja un archivo, activa el permiso de "Permitir siempre descargas múltiples" en la barra de direcciones de tu navegador.</span>
+</div>
+
+<div id="contenedor"></div>
+<footer>Asignatura: Sistemas Digitales 4to - Prof. Pantaleo</footer>
+<script>
+const grupos = [
+  ["1AM.xlsx","1AT.xlsx","1BM.xlsx"],
+  ["1BT.xlsx","1CM.xlsx","1CT.xlsx"],
+  ["2AM.xlsx","2AT.xlsx","2BM.xlsx"],
+  ["2BT.xlsx","2CM.xlsx","2CT.xlsx"],
+  ["3AM.xlsx","3AT.xlsx","3BM.xlsx"],
+  ["3BT.xlsx","3CM.xlsx","3CT.xlsx"],
+  ["4AM.xlsx","4AT.xlsx","4BM.xlsx"],
+  ["4BT.xlsx","4CM.xlsx","4CT.xlsx"],
+  ["5AM.xlsx","5AT.xlsx","5BM.xlsx"],
+  ["5BT.xlsx","5CM.xlsx","5CT.xlsx"],
+  ["6AM.xlsx","6AT.xlsx","6BM.xlsx"],
+  ["6BT.xlsx","6CM.xlsx","6CT.xlsx"]
+];
+
+const contenedor = document.getElementById("contenedor");
+
+grupos.forEach((grupo, index) => {
+  const div = document.createElement("div");
+  div.className = "grupo";
+
+  let html = `<h3>Grupo ${index + 1}</h3><div class="archivos">`;
+  grupo.forEach(archivo => {
+    html += `<a href="${archivo}" download>${archivo}</a>`;
+  });
+  html += `</div>`;
+  html += `<button onclick="descargarGrupo(${index})"><span>📥</span> Descargar Grupo ${index + 1}</button>`;
+
+  div.innerHTML = html;
+  contenedor.appendChild(div);
+});
+
+async function descargarGrupo(i) {
+  const archivos = grupos[i];
+
+  for (let index = 0; index < archivos.length; index++) {
+    const archivo = archivos[index];
+    
+    // Espera un segundo entre cada archivo para evitar bloqueos del navegador
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    const link = document.createElement("a");
+    link.href = archivo;
+    link.download = archivo;
+    link.style.display = "none";
+    
+    document.body.appendChild(link);
+    link.click();
+    
+    // Limpieza del DOM
+    setTimeout(() => {
+      document.body.removeChild(link);
+    }, 200);
+  }
+}
+</script>
+
+</body>
+</html>
