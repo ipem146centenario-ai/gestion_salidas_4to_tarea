@@ -1,255 +1,94 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Gestión de Salidas - Feria de Ciencias</title>
-
-<style>
-  :root {
-    --primary-color: #1a73e8;
-    --secondary-color: #28a745;
-    --warning-color: #ffc107;
-    --bg-color: #f8f9fa;
-    --text-color: #3c4043;
-  }
-
-  body {
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--bg-color);
-    margin: 0;
-    padding: 20px;
-    color: var(--text-color);
-    line-height: 1.6;
-  }
-
-  header {
-    text-align: center;
-    margin-bottom: 40px;
-    background: white;
-    padding: 20px;
-    border-radius: 0 0 20px 20px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  }
-
-  h1 {
-    color: var(--primary-color);
-    margin: 0;
-    font-size: 24px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .subtitle {
-    color: #5f6368;
-    font-size: 18px;
-    margin-top: 5px;
-  }
-
-  .instrucciones {
-    background: #fff;
-    padding: 25px;
-    max-width: 700px;
-    margin: 0 auto 40px;
-    border-left: 6px solid var(--warning-color);
-    border-radius: 12px;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.05);
-  }
-
-  .instrucciones h2 {
-    margin-top: 0;
-    color: #856404;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .instrucciones ul li {
-    margin-bottom: 12px;
-  }
-
-  code {
-    background: #f1f3f4;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-family: 'Consolas', monospace;
-    color: #d93025;
-  }
-
-  #contenedor {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .grupo {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    border: 1px solid #e0e0e0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .grupo h3 {
-    margin-top: 0;
-    color: var(--primary-color);
-    border-bottom: 2px solid #f1f3f4;
-    padding-bottom: 10px;
-    font-size: 18px;
-  }
-
-  .archivos {
-    margin: 15px 0;
-    flex-grow: 1;
-  }
-
-  .archivos a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 10px 0;
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  .archivos a:hover {
-    text-decoration: underline;
-  }
-
-  .archivos a::before {
-    content: "📄";
-  }
-
-  button {
-    padding: 12px;
-    width: 100%;
-    background: var(--secondary-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  button:hover {
-    background: #1e7e34;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-
-  button:active {
-    transform: translateY(0);
-  }
-
-  .aviso-navegador {
-    display: block;
-    margin-top: 15px;
-    padding-top: 10px;
-    border-top: 1px solid #eee;
-    color: #666;
-    font-style: italic;
-    font-size: 0.85em;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTIÓN SALIDAS | IPEM 146</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
+    <div id="loader">
+        <div class="spinner"></div>
+        <p>Cargando sistema...</p>
+    </div>
 
-<header>
-  <h1>Sistema Gestión de Salidas</h1>
-  <h2>Datos: Alumnos por curso</h2>
-  <div class="subtitle">Proyecto Feria de Ciencias</div>
-</header>
-
-<div class="instrucciones">
-  <h2>📋 Tarea a realizar (por cada archivo):</h2>
-  <ul>
-    <li>Descarga los archivos asignados por tu profesor a tu grupo</li>
-    <li>Abre cada archivo con <strong>Excel</strong>.</li>
-    <li>Elimina <strong>TODAS</strong> las columnas salvo: <code>nro dni</code>, <code>apellido</code>, <code>nombre</code>.</li>
-    <li>En <strong>D1</strong> agrega el título: <strong>Nombre</strong>.</li>
-    <li>En la celda <strong>D2</strong> ingresa la fórmula: <code>=B2&" "&C2</code></li>
-    <li>Aplica el <strong>Controlador de relleno</strong> hacia abajo para completar la columna.</li>
-    <li>Oculte las columnas B y C</li>
-    <li>Agrega las columnas: <strong>curso</strong>, <strong>division</strong>, <strong>turno</strong>, <strong>especialidad</strong>.</li>
-    <li>Complete informacion ej 1ero A Mañana Básico</li>
-    <h4>Nota  1ero a 3ero Especialidad BASICO 4to a 6to Especialidad ECONOMIA - INFORMATICA</h4>
-    <li>Selecione y aplica el <strong>Controlador de relleno</strong> hacia abajo para completar la columna.</li>
-    <li>Guarda todas las modificaciones.</li>
-  </ul>
-  <span class="aviso-navegador">💡 <strong>Nota:</strong> Si el botón de descarga solo baja un archivo, activa el permiso de "Permitir siempre descargas múltiples" en la barra de direcciones de tu navegador.</span>
-</div>
-
-<div id="contenedor"></div>
-<footer>Asignatura: Sistemas Digitales - Prof. Pantaleo</footer>
-<script>
-const grupos = [
-  ["1AM.xlsx","1AT.xlsx","1BM.xlsx"],
-  ["1BT.xlsx","1CM.xlsx","1CT.xlsx"],
-  ["2AM.xlsx","2AT.xlsx","2BM.xlsx"],
-  ["2BT.xlsx","2CM.xlsx","2CT.xlsx"],
-  ["3AM.xlsx","3AT.xlsx","3BM.xlsx"],
-  ["3BT.xlsx","3CM.xlsx","3CT.xlsx"],
-  ["4AM.xlsx","4AT.xlsx","4BM.xlsx"],
-  ["4BT.xlsx","4CM.xlsx","4ATinf.xlsx"],
-  ["5AM.xlsx","5AT.xlsx","5BM.xlsx","5ATinf.xlsx"],
-  ["5BT.xlsx","6AM.xlsx","6AT.xlsx"],
-  ["6BM.xlsx","6BT.xlsx","6ATinf.xlsx"]
-];
-
-const contenedor = document.getElementById("contenedor");
-
-grupos.forEach((grupo, index) => {
-  const div = document.createElement("div");
-  div.className = "grupo";
-
-  let html = `<h3>Grupo ${index + 1}</h3><div class="archivos">`;
-  grupo.forEach(archivo => {
-    html += `<a href="${archivo}" download>${archivo}</a>`;
-  });
-  html += `</div>`;
-  html += `<button onclick="descargarGrupo(${index})"><span>📥</span> Descargar Grupo ${index + 1}</button>`;
-
-  div.innerHTML = html;
-  contenedor.appendChild(div);
-});
-
-async function descargarGrupo(i) {
-  const archivos = grupos[i];
-
-  for (let index = 0; index < archivos.length; index++) {
-    const archivo = archivos[index];
+    <div id="toast-container"></div>
     
-    // Espera un segundo entre cada archivo para evitar bloqueos del navegador
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>📊 GESTIÓN SALIDAS <span>IPEM 146 "CENTENARIO"</span></h1>
+                <div class="header-buttons">
+                    <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">🌙</button>
+                    <button id="logoutBtn" class="logout-btn" onclick="cerrarSesion()" style="display:none;">🚪</button>
+                </div>
+            </div>
+        </header>
 
-    const link = document.createElement("a");
-    link.href = archivo;
-    link.download = archivo;
-    link.style.display = "none";
-    
-    document.body.appendChild(link);
-    link.click();
-    
-    // Limpieza del DOM
-    setTimeout(() => {
-      document.body.removeChild(link);
-    }, 200);
-  }
-}
-</script>
+        <div class="panel">
+            <div class="grupo-sesion">
+                <h3>🔑 ACCESO AL PERSONAL</h3>
+                <div class="controles">
+                    <select id="docentes">
+                        <option value="">Seleccione Usuario...</option>
+                    </select>
+                    <div class="password-box">
+                        <input type="password" id="passDocente" placeholder="PIN">
+                        <button class="toggle-pass" onclick="togglePassword()">👁</button>
+                    </div>
+                    <button class="btn-main" id="btnLogin" onclick="verificarAcceso()">ENTRAR</button>
+                </div>
+            </div>
 
+            <div id="seccion-filtros" style="display:none;">
+                <div class="filtros">
+                    <select id="fCurso"></select>
+                    <select id="fDivision"></select>
+                    <select id="fTurno"></select>
+                    <select id="fEspecialidad"></select>
+                </div>
+                <div class="destino-container">
+                    <label>📍 DESTINO REQUERIDO:</label>
+                    <select id="causa">
+                        <option value="">-- SELECCIONAR DESTINO --</option>
+                        <option value="Baño">🚻 Baño (Máx 15 min)</option>
+                        <option value="Dirección">🏫 Dirección</option>
+                        <option value="Preceptoría">📁 Preceptoría</option>
+                        <option value="Biblioteca">📚 Biblioteca</option>
+                        <option value="Kiosco">🍎 Kiosco</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="status-container" style="display:none;">
+            <div id="status">ROL: <strong id="user-role"></strong></div>
+        </div>
+
+        <div id="contador-container" style="display:none;">
+            <div class="contador-box">
+                <div class="contador-item total">TOTAL <strong id="total-alumnos">0</strong></div>
+                <div class="contador-item aula">EN AULA <strong id="en-aula">0</strong></div>
+                <div class="contador-item salida">AFUERA <strong id="afuera">0</strong></div>
+                <div class="contador-item ausente">AUSENTES <strong id="ausentes">0</strong></div>
+            </div>
+        </div>
+
+        <div id="buscador-box" style="display:none;">
+            <input type="text" id="buscador" placeholder="🔍 Buscar alumno..." oninput="render()">
+        </div>
+
+        <div id="grid"></div>
+
+        <div id="historial-container" style="display:none;">
+            <div class="historial-top">
+                <h2>📋 MOVIMIENTOS</h2>
+                <button class="btn-clear" onclick="limpiarHistorial()">🗑</button>
+            </div>
+            <div id="historial"></div>
+        </div>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>
