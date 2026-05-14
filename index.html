@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESTIÓN SALIDAS | IPEM 146</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="loader">
@@ -33,11 +33,8 @@
                     <select id="docentes">
                         <option value="">Seleccione Usuario...</option>
                     </select>
-                    <div class="password-box">
-                        <input type="password" id="passDocente" placeholder="PIN">
-                        <button class="toggle-pass" onclick="togglePassword()">👁</button>
-                    </div>
-                    <button class="btn-main" id="btnLogin" onclick="verificarAcceso()">ENTRAR</button>
+                    <input type="password" id="passDocente" placeholder="PIN">
+                    <button class="btn-main" onclick="verificarAcceso()">ENTRAR</button>
                 </div>
             </div>
 
@@ -56,14 +53,9 @@
                         <option value="Dirección">🏫 Dirección</option>
                         <option value="Preceptoría">📁 Preceptoría</option>
                         <option value="Biblioteca">📚 Biblioteca</option>
-                        <option value="Kiosco">🍎 Kiosco</option>
                     </select>
                 </div>
             </div>
-        </div>
-
-        <div id="status-container" style="display:none;">
-            <div id="status">ROL: <strong id="user-role"></strong></div>
         </div>
 
         <div id="contador-container" style="display:none;">
@@ -75,20 +67,21 @@
             </div>
         </div>
 
-        <div id="buscador-box" style="display:none;">
-            <input type="text" id="buscador" placeholder="🔍 Buscar alumno..." oninput="render()">
+        <div id="buscador-box" style="display:none;" class="panel">
+            <input type="text" id="buscador" placeholder="🔍 Buscar por nombre o DNI..." oninput="render()">
         </div>
 
         <div id="grid"></div>
 
-        <div id="historial-container" style="display:none;">
+        <div id="historial-container" style="display:none;" class="panel">
             <div class="historial-top">
-                <h2>📋 MOVIMIENTOS</h2>
+                <h2>📋 MOVIMIENTOS RECIENTES</h2>
                 <button class="btn-clear" onclick="limpiarHistorial()">🗑</button>
             </div>
             <div id="historial"></div>
         </div>
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>
